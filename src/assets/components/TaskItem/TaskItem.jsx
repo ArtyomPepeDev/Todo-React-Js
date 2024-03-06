@@ -1,19 +1,26 @@
 import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { useActions } from "../../../hooks/useActions";
+import { BadgeX } from "lucide-react";
 
-function TaskItem({ task, addToFolder }) {
-  const [value, setValue] = useState("");
+function TaskItem({ task }) {
+  const { tasks } = useSelector((state) => state);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    addToFolder(task.id, value);
-  };
+  const { taskDone, removeTask } = useActions();
+
+  console.log(tasks);
   return (
-    <div>
+    <div className="task-item">
+      <input
+        onChange={() => taskDone(task.id)}
+        type="checkbox"
+        checked={task.completed}
+      />
       <p>{task.text}</p>
-      <form onSubmit={handleSubmit}>
-        <input type="text" onChange={(e) => setValue(e.target.value)} />
-        <button type="submit">Add to Folder</button>
-      </form>
+      <BadgeX onClick={() => removeTask(task.id)} />
+      {/* <button onClick={() => addToDone(task)}>
+        {isExists ? "Remove" : "Save"} task
+      </button> */}
     </div>
   );
 }

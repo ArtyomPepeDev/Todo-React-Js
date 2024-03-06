@@ -1,22 +1,29 @@
 import React, { useState } from "react";
+import { useActions } from "../../../hooks/useActions";
 
-function TaskForm({ add, text, title }) {
+function TaskForm({ add, folder }) {
   const [value, setValue] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    add(value);
+    if (value.trim()) {
+      add({value, folder});
+      setValue("");
+    }
   };
+
   return (
     <>
       <form className="input-folder" onSubmit={handleSubmit}>
-        <h4>{title}</h4>
         <input
           type="text"
           value={value}
+          placeholder="Write a folder..."
+          maxLength={15}
           onChange={(e) => setValue(e.target.value)}
         />
-        <button type="submit">{text}</button>
+
+        {/* <button type="submit">{text}</button> */}
       </form>
     </>
   );

@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import TaskItem from "../TaskItem/TaskItem";
 import { ChevronDown, ChevronUp, Folder } from "lucide-react";
+import TaskForm from "../TaskForm/TaskForm";
+import { useActions } from "../../../hooks/useActions";
 
-function FolderList({ addToFolder, folder, sortedByFolder }) {
+function FolderList({ folder, sortedByFolder }) {
   const [isOpen, setIsOpen] = useState(true);
 
-  const handleOpenClick = (index) => {
+  const { addTask } = useActions();
+
+  const handleOpenClick = () => {
     setIsOpen(!isOpen);
   };
   return (
@@ -16,15 +20,24 @@ function FolderList({ addToFolder, folder, sortedByFolder }) {
             <Folder /> {folder}
           </span>
           <p className="folder-line"></p>
-          {isOpen ? <ChevronDown size={60} /> : <ChevronUp size={60} />}
+          <span className="folder-arrow">
+            {isOpen ? <ChevronDown size={60} /> : <ChevronUp size={60} />}
+          </span>
+          <span className={isOpen === true ? "hidden" : "checkTask"}>
+            {isOpen === true ? null : sortedByFolder[folder]?.length}
+          </span>
         </p>
       )}
-      <div
-        className={isOpen ? "folders-container" : "folders-container hidden"}
-      >
+      <div className={isOpen ? "folders" : "folders hidden"}>
         {sortedByFolder[folder]?.map((task) => (
-          <TaskItem key={task.id} task={task} addToFolder={addToFolder} />
+          <TaskItem
+            key={task.id}
+            task={task}
+          />
         ))}
+        {folder.length > 1 && (
+          <TaskForm add={addTask} folder={folder} text="Add task" />
+        )}
       </div>
     </div>
   );

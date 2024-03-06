@@ -2,7 +2,7 @@ import React, { Fragment, useState } from "react";
 import TaskItem from "../TaskItem/TaskItem";
 import FolderList from "../FolderList/FolderList";
 
-function TaskList({ tasks, folders, addToFolder }) {
+function TaskList({ tasks, addTask, folders }) {
   const groupBy = (arr, property) => {
     return arr.reduce(function (memo, x) {
       if (!memo[x[property]]) {
@@ -21,10 +21,12 @@ function TaskList({ tasks, folders, addToFolder }) {
       {folders.map((folder, index) => (
         <Fragment key={folder}>
           <FolderList
+            addTask={addTask}
+            tasks={tasks}
+            folders={folders}
             key={index}
             folder={folder}
             sortedByFolder={sortedByFolder}
-            addToFolder={addToFolder}
           />
         </Fragment>
       ))}
