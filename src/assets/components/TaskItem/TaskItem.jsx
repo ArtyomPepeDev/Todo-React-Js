@@ -18,9 +18,6 @@ function TaskItem({ task }) {
       />
       <p>{task.text}</p>
       <BadgeX onClick={() => removeTask(task.id)} />
-      {/* <button onClick={() => addToDone(task)}>
-        {isExists ? "Remove" : "Save"} task
-      </button> */}
     </div>
   );
 }

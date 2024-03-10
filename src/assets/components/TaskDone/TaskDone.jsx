@@ -5,8 +5,6 @@ import { Link } from "react-router-dom";
 function TaskDone() {
   const tasks = useSelector((state) => state.tasks.tasks);
 
-  const folders = useSelector((state) => state.tasks.folders);
-
   console.log(tasks);
 
   const completedTasks = tasks.filter((task) => task.completed === true);

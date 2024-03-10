@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   tasks: JSON.parse(localStorage.getItem("tasks") || "[]"),
-  folders: JSON.parse(localStorage.getItem("folders") || '[""]'),
+  folders: JSON.parse(localStorage.getItem("folders") || '[]'),
 };
 
 export const tasksSlice = createSlice({

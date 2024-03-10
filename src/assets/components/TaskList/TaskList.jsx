@@ -18,17 +18,15 @@ function TaskList({ tasks, addTask, folders }) {
 
   return (
     <div className="folders-container">
-      {folders.map((folder, index) => (
-        <Fragment key={folder}>
+      {folders.map((folder) => (
           <FolderList
             addTask={addTask}
             tasks={tasks}
             folders={folders}
-            key={index}
+            key={folder}
             folder={folder}
             sortedByFolder={sortedByFolder}
           />
-        </Fragment>
       ))}
     </div>
   );
